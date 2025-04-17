@@ -7,7 +7,6 @@ on:
 jobs:
   pack:
     runs-on: ubuntu-24.04
-    if: startsWith(github.head_ref, 'renovate/') || startsWith(github.head_ref, 'dependabot/')
     env:
       CRX_FILE_NAME: cc-smooth-steer-${{ github.event.release.tag_name }}.crx
     steps:
