@@ -1,0 +1,35 @@
+name: Build extension on release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  pack:
+    runs-on: ubuntu-24.04
+    if: startsWith(github.head_ref, 'renovate/') || startsWith(github.head_ref, 'dependabot/')
+    env:
+      CRX_FILE_NAME: cc-smooth-steer-${{ github.event.release.tag_name }}.crx
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Load key file
+        run: echo "${{ secrets.CRX_SIGNING_KEY }}" > key.pem
+
+      - name: Pack extension
+        run: npx crx pack extension --output ${{ env.CRX_FILE_NAME }}
+
+      - uses: AButler/upload-release-assets@v3.0
+        with:
+          files: ${{ env.CRX_FILE_NAME }}
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
