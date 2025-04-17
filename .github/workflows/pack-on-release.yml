@@ -28,7 +28,7 @@ jobs:
       - name: Pack extension
         run: npx crx pack extension --output ${{ env.CRX_FILE_NAME }}
 
-      - uses: AButler/upload-release-assets@v3.0
-        with:
-          files: ${{ env.CRX_FILE_NAME }}
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload release
+        run: gh release upload ${{ github.event.release.tag_name }} ${{ env.CRX_FILE_NAME }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
