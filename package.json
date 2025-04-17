@@ -2,6 +2,7 @@
   "name": "cc-smooth-steer",
   "description": "Smooth, analog steering for Curve Crash",
   "version": "1.0.0",
+  "private": true,
   "scripts": {
     "pack": "crx pack extension --output extension.crx"
   },
