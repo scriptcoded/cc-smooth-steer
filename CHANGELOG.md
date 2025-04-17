@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.3](https://github.com/scriptcoded/cc-smooth-steer/compare/v1.0.2...v1.0.3) (2025-04-17)
+
+
+### Bug Fixes
+
+* empty commit to trigger release ([3e2f49e](https://github.com/scriptcoded/cc-smooth-steer/commit/3e2f49e55fd1bf848e26345fee8fddd37f546a23))
+
 ## [1.0.2](https://github.com/scriptcoded/cc-smooth-steer/compare/v1.0.1...v1.0.2) (2025-04-17)
 
 
