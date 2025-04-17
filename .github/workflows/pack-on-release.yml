@@ -12,6 +12,7 @@ jobs:
     runs-on: ubuntu-24.04
     env:
       CRX_FILE_NAME: cc-smooth-steer-${{ github.event.release.tag_name }}.crx
+      ZIP_FILE_NAME: cc-smooth-steer-${{ github.event.release.tag_name }}.zip
     steps:
       - uses: actions/checkout@v4
         with:
@@ -29,9 +30,11 @@ jobs:
         run: echo "${{ secrets.CRX_SIGNING_KEY }}" > key.pem
 
       - name: Pack extension
-        run: npx crx pack extension --output ${{ env.CRX_FILE_NAME }}
+        run: |
+          npx crx pack extension --output ${{ env.CRX_FILE_NAME }}
+          npx crx pack extension --zip-output ${{ env.ZIP_FILE_NAME }}
 
       - name: Upload release
-        run: gh release upload ${{ github.event.release.tag_name }} ${{ env.CRX_FILE_NAME }}
+        run: gh release upload ${{ github.event.release.tag_name }} ${{ env.CRX_FILE_NAME }} ${{ env.ZIP_FILE_NAME }}
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
