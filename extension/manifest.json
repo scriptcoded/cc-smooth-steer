@@ -1,0 +1,12 @@
+{
+  "name": "CC Smooth Steer",
+  "description": "Adds smooth controller input to Curve Crash",
+  "version": "1.0",
+  "manifest_version": 3,
+  "content_scripts": [
+    {
+      "matches": ["https://*.curvecrash.com/play/"],
+      "js": ["scripts/content.js"]
+    }
+  ]
+}
